@@ -300,18 +300,7 @@ def tweetParse(tweet):
 
 class TwitterAPI:
     def __init__(self):
-        self.keys = [
-                    # ['3nVuSoBZnx6U4vzUxf5w','Bcs59EFbbsdF6Sl9Ng71smgStWEGwXXKSjYvPVt7qys'],
-                    # ['IQKbtAYlXLripLGPWd0HUA','GgDYlkSvaPxGxC4X8liwpUoqKwwr3lCADbz8A7ADU'],
-                    # ['CjulERsDeqhhjSme66ECg','IQWdVyqFxghAtURHGeGiWAsmCAGmdW3WmbEx6Hck'],
-                    # ['3rJOl1ODzm9yZy63FACdg','5jPoQ5kQvMJFDYRNE8bQ4rHuds4xJqhvgNJM4awaE8'],
-                    # ['3nVuSoBZnx6U4vzUxf5w','Bcs59EFbbsdF6Sl9Ng71smgStWEGwXXKSjYvPVt7qys'],
-                    # ['d0CTc4Zg9pufCnMkteDc7w','z4FMZhP87U5QEwycggDe5JN6TDDh7xEyhnAcEpdWk'],
-                    # ['CVbiuNGV6MeQCsku7SUZnejVb','AXzQ9ZSxu1JPWbQNXHj4Zn1uI32fMDviLDYyKM6RihwPjGz6i9'],
-                     ['7Uifmz2gkHF8RcOcMtItTJRoF', 'YmcL95Yy15zvwAfGVaCrbGaUkcWo6wv0OT9RXCOxWfoHwuY1RT'],
-                    # ['fTOd3soD4e9vhvArXdoVFVdCS', 'WlBzWiuZ33RxyFhJXPuMMRWi1tJu71hzIGLUYHv6k59DsXOYjp'],
-                    #['PMXB9uR9Qfh4gweyTtjOZqZvV', 'dwaLM6DL8kPQnUppJp8upK9ftTdfu30vcCP03vOb5dgRYW2mH5'],
-                    ]
+        self.keys = []
         
 
         self.data = []
@@ -324,13 +313,7 @@ class TwitterAPI:
                 print('working')
             except:
                 print(f'Failure on {x[0]}, does not work any more')
-            # client = tweepy.Client(
-            #     consumer_key="q57QlTTwLKnCoacZZobutKuoB",
-            #     consumer_secret="TX2t6yrMaM6VmXdKHQhtiwBF9K4uZYUgBCIwHvb0Ao5kR0fN3o",
-            #     access_token="1708154522-5g1ftU40y8FsWiIjRUoq6miG6prgKxrKDFG1wf4",
-            #     access_token_secret="7P4eHgzSVllx5tA8Tzt4ppIrAAXUFg2khWXnKtejdIc8P"
-            # )
-            # self.apis.append(client)
+
     @property
     def keysLen(self,):
         return len(self.apis)
