@@ -1,0 +1,65 @@
+services:
+  ecomidia-backend:
+    build:
+      context: ./backend
+    command: >
+      sh -c  "python manage.py wait_for_db &&
+              python manage.py migrate --run-syncdb &&
+              python manage.py runserver 0.0.0.0:10001"
+    ports:
+      - 10001:10001
+    volumes:
+      - ./backend:/backend
+    environment:
+      - SECRET_KEY=devsecretkey
+      - DEBUG=1
+      - DB_HOST=ecomidia-db
+      - DB_NAME=devdb
+      - DB_USER=devuser
+      - DB_PASS=changeme
+    depends_on:
+      - ecomidia-db
+
+  ecomidia-db:
+    image: postgres:13-alpine
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data/
+    ports:
+      - 55432:5432
+    environment:
+      - POSTGRES_DB=devdb
+      - POSTGRES_USER=devuser
+      - POSTGRES_PASSWORD=changeme
+
+  wp_db:
+    # We use a mariadb image which supports both amd64 & arm64 architecture
+    image: mariadb:10.6.4-focal
+    # If you really want to use MySQL, uncomment the following line
+    #image: mysql:8.0.27
+    command: '--default-authentication-plugin=mysql_native_password'
+    volumes:
+      - ./data/wp_db:/var/lib/mysql
+    # restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=somewordpress
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+    ports:
+      - 3306:3306
+      - 33060:33060
+  wp:
+    image: wordpress:latest
+    volumes:
+      - ./data/wp_data:/var/www/html
+    ports:
+      - 80:80
+    # restart: always
+    environment:
+      - WORDPRESS_DB_HOST=wp_db
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
+      - WORDPRESS_DB_NAME=wordpress
+volumes:
+  wp_db:
+  wp_data:

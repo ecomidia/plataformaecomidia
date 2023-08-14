@@ -1,0 +1,15 @@
+// app global css in SCSS form
+
+body,
+header {
+  background-color: $background;
+}
+
+.maxwidth{
+  max-width: 1600px;
+  margin: auto;
+}
+
+.q-table__bottom:nth-child(3)>div:nth-child(2){
+  display: none!important;
+}
